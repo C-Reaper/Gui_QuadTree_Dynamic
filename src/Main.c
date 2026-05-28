@@ -77,6 +77,7 @@ void Update(AlxWindow* w){
 
 	Clear(BLACK);
 	
+	Timepoint start = Time_Nano();
 	Vector visible = DQuadTree_Search(&tree,w_screen);
 	const int ObjectCount = visible.size;
 	
@@ -92,7 +93,6 @@ void Update(AlxWindow* w){
 	RenderRectAlpha(mp.x,mp.y,md.x,md.y,0x55FFFFFF);
 
 	const size_t tree_size = DQuadTree_Size(&tree);
-	Timepoint start = Time_Nano();
 	FDuration ElapsedTime = Time_Elapsed(start,Time_Nano());
 	CStr_RenderAlxFontf(WINDOW_STD_ARGS,GetAlxFont(),0.0f,0.0f,WHITE,"O: %f,%f | Z: %f,%f",tv.Offset.x,tv.Offset.y,tv.Scale.x,tv.Scale.y);
 	CStr_RenderAlxFontf(WINDOW_STD_ARGS,GetAlxFont(),0.0f,GetAlxFont()->CharSizeY,WHITE,"%d/%d in %f",ObjectCount,tree_size,ElapsedTime);
